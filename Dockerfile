@@ -21,8 +21,8 @@ RUN if $build_dependences ; then \
 																									libdc1394-22-dev libraw1394-dev \
 																									libjpeg-dev libtiff5-dev \
 																									libopenexr-dev libeigen3-dev \
-																									qemu gcc-aarch64-linux-gnu build-essential \
-																									libboost-all-dev libpcap-dev libssl-dev g++ ;\
+																									qemu build-essential libboost-all-dev \
+																									libpcap-dev libssl-dev g++ ;\
 				ldconfig ;\
 				rm -rf /var/lib/apt/lists/* && apt-get clear ;\
 				update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1;\
@@ -62,18 +62,18 @@ RUN if $build_dependences ; then \
 			make install; fi
 
 # OpenCV installation
-ARG opencv_Path='/slampy/program/opencv-3.4.11'
-ARG opencv_contrib_Path='/slampy/program/opencv_contrib-3.4.11'
+ARG opencv_Path='/slampy/program/opencv-3.4.18'
+ARG opencv_contrib_Path='/slampy/program/opencv_contrib-3.4.18'
 ARG build_dependences=true
 
 RUN if $build_dependences ; then \
 				mkdir $opencv_Path &&\
-				wget https://github.com/opencv/opencv/archive/3.4.11.zip && \
-				unzip 3.4.11.zip -d /slampy/program &&\
-				rm 3.4.11.zip && \
-				wget https://github.com/opencv/opencv_contrib/archive/3.4.11.zip && \
-				unzip 3.4.11.zip -d /slampy/program && \
-				rm 3.4.11.zip && \
+				wget https://github.com/opencv/opencv/archive/3.4.18.zip && \
+				unzip 3.4.18.zip -d /slampy/program &&\
+				rm 3.4.18.zip && \
+				wget https://github.com/opencv/opencv_contrib/archive/3.4.18.zip && \
+				unzip 3.4.18.zip -d /slampy/program && \
+				rm 3.4.18.zip && \
 				cd $opencv_Path && \
 				mkdir $opencv_Path/build &&\
 				cd $opencv_Path/build &&\
@@ -82,7 +82,7 @@ RUN if $build_dependences ; then \
 			  	make -j$(nproc) &&\
 				make install && \
 				pip3 install --upgrade pip &&\
-				python3 -mpip install opencv-contrib-python==3.4.11.45; fi
+				python3 -mpip install opencv-contrib-python==3.4.18.65; fi
 
 
 # Orb_Slam2 installation
